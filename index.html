@@ -36,7 +36,6 @@ body{
   flex-direction:column;
 }
 
-/* MAIN */
 .main{
   flex:1;
   display:flex;
@@ -62,7 +61,6 @@ body{
 }
 
 .logo{width:75px;margin-bottom:12px}
-h1{font-size:1.1rem;margin-bottom:20px}
 
 input[type=file],
 #pdfName,
@@ -94,7 +92,10 @@ input[type=file]{
   transition:.25s;
 }
 
-.btn:hover{background:var(--primary-dark);transform:translateY(-2px)}
+.btn:hover{
+  background:var(--primary-dark);
+  transform:translateY(-2px)
+}
 
 #result{min-height:24px;font-weight:600}
 .success{color:var(--primary)}
@@ -184,7 +185,6 @@ input[type=file]{
 <div class="main">
   <div class="card">
     <img src="https://github.com/xsararex/psd/blob/main/01.png?raw=true" class="logo">
- 
 
     <div class="progress-container" id="progressBox">
       <div class="progress-bar" id="progressBar"></div>
@@ -257,9 +257,6 @@ async function confirmUploadPDF(){
   const name=pdfName.value.trim();
   if(!name){alert("กรุณาตั้งชื่อไฟล์");return;}
 
-  const file=new File([window.generatedPDF],name+".pdf",{type:"application/pdf"});
-  const url=URL.createObjectURL(file);
-
   result.innerHTML=`
   <div class="download-box">
     <div class="download-info">
@@ -267,32 +264,35 @@ async function confirmUploadPDF(){
       <strong>${name}.pdf</strong>
     </div>
     <div class="download-actions">
-      <button class="download-btn" onclick="downloadFile('${url}','${name}.pdf')">ดาวน์โหลด</button>
-      <button class="download-btn" onclick="shareToLine('${url}')">แชร์ LINE</button>
+      <button class="download-btn" onclick="downloadFile('${name}')">ดาวน์โหลด</button>
+      <button class="download-btn" onclick="shareToLine('${name}')">แชร์ LINE</button>
     </div>
   </div>
   `;
 }
 
-function downloadFile(url,filename){
+function downloadFile(name){
+  const file=new File([window.generatedPDF],name+".pdf",{type:"application/pdf"});
+  const url=URL.createObjectURL(file);
   const a=document.createElement("a");
   a.href=url;
-  a.download=filename;
+  a.download=name+".pdf";
   a.click();
 }
 
-async function shareToLine(url){
-  if(navigator.share){
+async function shareToLine(name){
+  const file=new File([window.generatedPDF],name+".pdf",{type:"application/pdf"});
+
+  if(navigator.canShare && navigator.canShare({ files:[file] })){
     try{
       await navigator.share({
-        title:"PDF File",
-        text:"ส่งไฟล์ PDF ให้คุณ",
-        url:url
+        title:name,
+        text:"ส่งไฟล์ PDF",
+        files:[file]
       });
     }catch(err){}
   }else{
-    const lineURL="https://social-plugins.line.me/lineit/share?url="+encodeURIComponent(url);
-    window.open(lineURL,"_blank");
+    alert("อุปกรณ์นี้ไม่รองรับการแชร์ไฟล์\nให้เปิดจากมือถือผ่าน https");
   }
 }
 
@@ -307,5 +307,4 @@ function toBase64(file){
 </script>
 
 </body>
-
 </html>
