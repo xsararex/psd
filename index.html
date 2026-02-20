@@ -188,11 +188,11 @@ input[type=file]{
 
 <body>
 
-<div class="toggle" onclick="toggleDark()">🌙</div>
+<div class="toggle" onclick="toggleDark()">☀</div>
 
 <div class="main">
   <div class="card">
-    <img src="icon-192.png" class="logo">
+    <img src="01.png" class="logo">
 
     <div class="progress-container" id="progressBox">
       <div class="progress-bar" id="progressBar"></div>
@@ -257,23 +257,23 @@ async function makePDF(){
   }
 
   window.generatedPDF=pdf.output("blob");
-  result.innerHTML="<span class='success'>✔ สร้าง PDF สำเร็จ</span>";
+  result.innerHTML="<span class='success'>✔ PDF Succeed</span>";
   filenameBox.style.display="block";
 }
 
 async function confirmUploadPDF(){
   const name=pdfName.value.trim();
-  if(!name){alert("กรุณาตั้งชื่อไฟล์");return;}
+  if(!name){alert("Please name the file.");return;}
 
   result.innerHTML=`
   <div class="download-box">
     <div class="download-info">
-      <span>สร้างไฟล์สำเร็จ</span>
+      <span>File created successfully</span>
       <strong>${name}.pdf</strong>
     </div>
     <div class="download-actions">
-      <button class="download-btn" onclick="downloadFile('${name}')">ดาวน์โหลด</button>
-      <button class="download-btn" onclick="shareToLine('${name}')">แชร์ LINE</button>
+      <button class="download-btn" onclick="downloadFile('${name}')">download</button>
+      <button class="download-btn" onclick="shareToLine('${name}')">Share LINE</button>
     </div>
   </div>
   `;
@@ -325,3 +325,4 @@ if ('serviceWorker' in navigator) {
 
 </body>
 </html>
+
