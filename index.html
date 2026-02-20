@@ -183,21 +183,21 @@ input[type=file]{
 
 <div class="main">
   <div class="card">
-    <img src="img/01.png" class="logo">
-    <h1>📷 แปลงรูปภาพเป็น PDF</h1>
+    <img src="https://github.com/xsararex/psd/blob/main/01.png?raw=true" class="logo">
+ 
 
     <div class="progress-container" id="progressBox">
       <div class="progress-bar" id="progressBar"></div>
     </div>
 
     <input type="file" id="images" accept="image/*" multiple>
-    <button class="btn" onclick="makePDF()">แปลงเป็น PDF</button>
+    <button class="btn" onclick="makePDF()">Convert to PDF</button>
 
     <div id="result"></div>
 
     <div id="filenameBox" style="display:none">
-      <input type="text" id="pdfName" placeholder="ตั้งชื่อไฟล์ PDF">
-      <button class="btn" onclick="confirmUploadPDF()">✔ ยืนยัน</button>
+      <input type="text" id="pdfName" placeholder="Name PDF">
+      <button class="btn" onclick="confirmUploadPDF()">✔ OK</button>
     </div>
   </div>
 </div>
@@ -307,4 +307,5 @@ function toBase64(file){
 </script>
 
 </body>
+
 </html>
