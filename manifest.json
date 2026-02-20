@@ -7,7 +7,7 @@
   "theme_color": "#e4252a",
   "icons": [
     {
-      "src": "192.png",
+      "src": "https://github.com/xsararex/psd/blob/main/192.png?raw=true",
       "sizes": "192x192",
       "type": "image/png"
     },
@@ -19,3 +19,4 @@
   ]
 
 }
+
