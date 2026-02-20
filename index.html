@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#61BA93">
-<link rel="apple-touch-icon" href="icon-192.png">
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
 <title>Image to PDF</title>
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#61BA93">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
@@ -104,7 +111,6 @@ input[type=file]{
 .success{color:var(--primary)}
 .error{color:#ff5a5a}
 
-/* Progress */
 .progress-container{
   width:100%;
   height:8px;
@@ -122,7 +128,6 @@ input[type=file]{
   transition:.3s;
 }
 
-/* Download Box */
 .download-box{
   margin-top:15px;
   padding:18px;
@@ -187,7 +192,7 @@ input[type=file]{
 
 <div class="main">
   <div class="card">
-    <img src="https://github.com/xsararex/psd/blob/main/01.png?raw=true" class="logo">
+    <img src="icon-192.png" class="logo">
 
     <div class="progress-container" id="progressBox">
       <div class="progress-bar" id="progressBar"></div>
@@ -307,8 +312,16 @@ function toBase64(file){
     reader.onerror=e=>rej(e);
   });
 }
+
+/* REGISTER SERVICE WORKER */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then(() => console.log('SW Registered'))
+      .catch(err => console.log('SW Failed', err));
+  });
+}
 </script>
 
 </body>
 </html>
-
